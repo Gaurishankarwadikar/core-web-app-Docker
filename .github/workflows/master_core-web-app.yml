@@ -31,7 +31,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: .net-app
+          name: core-web-app-Docker
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
@@ -45,13 +45,13 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: .net-app
+          name: core-web-app-Docker
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Core-web-app'
+          app-name: 'Core-web-app-Docker'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_821D9F5ACB85465295C169925C98AA7F }}
           package: .
